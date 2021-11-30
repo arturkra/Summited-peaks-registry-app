@@ -1,0 +1,38 @@
+.caly-formularz{
+    padding: 20px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)), url('../resources/_DSC1609.JPG') ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height:35%;
+    color: rgb(180, 180, 180);
+    
+    
+}
+
+.naglowek-formularza{
+    font-size:x-large;
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 25px
+
+}
+
+
+input{
+    margin: 6px;
+    padding: 5px;
+    background-color: rgb(117, 117, 117); 
+    border: 10px;
+    border-radius: 5px;
+}
+.przycisk-dodaj-przejscie{
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+    color: rgb(180, 180, 180);
+    background-color: darkslategray;
+    font-size: medium;
+
+}
