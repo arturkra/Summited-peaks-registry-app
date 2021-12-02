@@ -1,8 +1,17 @@
-.gora{
-    padding: 5px;
+.gora{  
+    font-size: x-large;
+    padding: 2px;
     margin: 10px;
-
     border-radius: 7px;
     background-color: darkslategrey;
     color: rgb(180, 180, 180);
+    
+
+}
+.naglowek-gory{
+    text-align: center;
+}
+
+.dane-gory{
+    font-size: medium;
 }

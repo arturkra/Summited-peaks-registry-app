@@ -1,4 +1,5 @@
 .caly-formularz{
+    font-family: 'Lato', sans-serif;
     padding: 20px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)), url('../resources/_DSC1609.JPG') ;
     background-size: cover;

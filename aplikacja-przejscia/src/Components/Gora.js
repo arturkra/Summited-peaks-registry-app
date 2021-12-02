@@ -11,7 +11,7 @@ function Gora(props){
 
     return(
         <div className='gora'>
-            <h2>{nazwaGory}</h2>
+            <h2 className='naglowek-gory'>{nazwaGory}</h2>
             <div className='dane-gory'>
                 <h3>Wysokość: {wysokoscGory}</h3>
                 <h3>Kraj: {krajGory}</h3>
