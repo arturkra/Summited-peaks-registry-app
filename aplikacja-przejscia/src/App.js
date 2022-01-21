@@ -1,21 +1,15 @@
 import React,{useState} from 'react';
 import './App.css';
 import NowePrzejscie from './Components/NowePrzejscie/NowePrzejscie';
-import Przejscie from './Components/Przejscie.js'
+//import Przejscie from './Components/Przejscie.js'
+import ListaPrzejsc from './Components/ListaPrzejsc'
 //import { Fragment } from 'react/cjs/react.production.min';
 
 function App() {
   
-  const [listaPrzejsc, setPrzejscia] = useState([]
-/*     [{
-    danePrzejscia: {
-      dataPrzejscia: new Date(),
-      wysokoscGory : 6546126,
-      nazwaGory: 'asdaas',
-      uwagiDoPrzejscia: 'ajsggfaks',
-      krajGory: 'asjhfgsaf'
-    }}] */
-  );
+  const [listaPrzejsc, setPrzejscia] = useState([]);
+
+  let zapisywanePrzejscie = {};
   
   const addPrzejscieHandler = (przejscie) => {
       //console.log('App.js');
@@ -26,7 +20,9 @@ function App() {
         return [przejscie,...listaPrzejsc];
       });
       
-      console.log(listaPrzejsc);
+      zapisywanePrzejscie = przejscie;
+
+      //console.log(listaPrzejsc);
   }
 
   //let listaPrzejsc = [];
@@ -41,7 +37,9 @@ function App() {
       </div>
     <React.Fragment>
 
-    {listaPrzejsc.map(przejscie => 
+    <ListaPrzejsc przejscie={zapisywanePrzejscie}/>
+
+    {/* {listaPrzejsc.map(przejscie => 
       <Przejscie
         key = {Math.random()}
         data = {przejscie.danePrzejscia.dataPrzejscia}
@@ -51,7 +49,7 @@ function App() {
         uwagi = {przejscie.danePrzejscia.uwagiPrzejscia}
       />
       
-  )}
+  )} */}
 
       
      

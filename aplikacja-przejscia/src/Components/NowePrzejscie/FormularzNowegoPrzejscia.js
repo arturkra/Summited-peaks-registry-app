@@ -110,7 +110,6 @@ function FormularzNowegoPrzejscia(props){
     
     const nazwaChangeHandler = (event) => {
         dispatchPrzejscie({type:'INPUT_NAZWA', value: event.target.value});
-        console.log(event.target.value);
         //setNazwa(event.target.value);
     };
     const wysokoscChangeHandler = (event) => {
