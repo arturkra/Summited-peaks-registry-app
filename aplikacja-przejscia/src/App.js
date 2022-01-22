@@ -4,26 +4,27 @@ import NowePrzejscie from './Components/NowePrzejscie/NowePrzejscie';
 //import Przejscie from './Components/Przejscie.js'
 import ListaPrzejsc from './Components/ListaPrzejsc'
 //import { Fragment } from 'react/cjs/react.production.min';
+import {PrzejscieContextProvider} from './Components/Context/PrzejscieContext';
 
 function App() {
   
-  const [listaPrzejsc, setPrzejscia] = useState([]);
+  //const [listaPrzejsc, setPrzejscia] = useState([]);
 
-  let zapisywanePrzejscie = {};
+
   
-  const addPrzejscieHandler = (przejscie) => {
-      //console.log('App.js');
-      console.log(przejscie);
-      //listaPrzejsc.push(przejscie);
-      //console.log(listaPrzejsc);
-      setPrzejscia((listaPrzejsc) => {
-        return [przejscie,...listaPrzejsc];
-      });
+  // const addPrzejscieHandler = (przejscie) => {
+  //     //console.log('App.js');
+  //     console.log(przejscie);
+  //     //listaPrzejsc.push(przejscie);
+  //     //console.log(listaPrzejsc);
+  //     setPrzejscia((listaPrzejsc) => {
+  //       return [przejscie,...listaPrzejsc];
+  //     });
       
-      zapisywanePrzejscie = przejscie;
+  //     zapisywanePrzejscie = przejscie;
 
-      //console.log(listaPrzejsc);
-  }
+  //     //console.log(listaPrzejsc);
+  // }
 
   //let listaPrzejsc = [];
 
@@ -31,13 +32,16 @@ function App() {
 
 
   return (
+    <PrzejscieContextProvider>
+
+    
     <React.Fragment>
       <div className='dodaj-przejscie'>
-        <NowePrzejscie onAddPrzejscie = {addPrzejscieHandler} />
+        <NowePrzejscie  />
       </div>
     <React.Fragment>
 
-    <ListaPrzejsc przejscie={zapisywanePrzejscie}/>
+    <ListaPrzejsc/>
 
     {/* {listaPrzejsc.map(przejscie => 
       <Przejscie
@@ -56,7 +60,7 @@ function App() {
     </React.Fragment>
     </React.Fragment>
     
-
+    </PrzejscieContextProvider>
     
 
   );

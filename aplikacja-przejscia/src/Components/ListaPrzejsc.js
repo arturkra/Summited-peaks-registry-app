@@ -1,18 +1,19 @@
-import React,{useState} from "react";
+import React,{useState, useContext} from "react";
 import Przejscie from './Przejscie'
+import {PrzejscieContext} from './Context/PrzejscieContext'
 
 
 
 const  ListaPrzejsc = (props) => {
-
-    const x = 'asjdkghbasjldlaksdl';    
-
+    
+    const [nowePrzejscieContext,setNowePrzejscieContext] = useContext(PrzejscieContext);
 
     const [listaPrzejsc, setListaPrzejsc] = useState([])
 
-
-
-    
+    ////////////////////////////////////////////////////////////
+    //Nie chce wyświetlać Przejsc. Dodają się do tablicy, ale //
+    //element się nie odświeża.                               //
+    ////////////////////////////////////////////////////////////    
 
 
 
@@ -22,19 +23,20 @@ const  ListaPrzejsc = (props) => {
     
 
     console.log("lista przejsc");
-    console.log(listaPrzejsc);
+    console.log(nowePrzejscieContext);
 
     return(
         <div>
-            {listaPrzejsc.map(przejscie => {
-                <Przejscie
-                key = {Math.random()}
-                data = {przejscie.danePrzejscia.dataPrzejscia}
-                gora = {przejscie.danePrzejscia.nazwaGory}
-                kraj = {przejscie.danePrzejscia.krajGory}
-                wysokosc = {przejscie.danePrzejscia.wysokoscGory}
-                uwagi = {przejscie.danePrzejscia.uwagiPrzejscia}
-              />
+            {nowePrzejscieContext.map(przejscie => {
+                return(<Przejscie
+                    key = {Math.random()}
+                    data = {przejscie.dataPrzejscia}
+                    gora = {przejscie.nazwaGory}
+                    kraj = {przejscie.krajGory}
+                    wysokosc = {przejscie.wysokoscGory}
+                    uwagi = {przejscie.uwagiPrzejscia}
+                  />)
+                
             })}
             
         </div>

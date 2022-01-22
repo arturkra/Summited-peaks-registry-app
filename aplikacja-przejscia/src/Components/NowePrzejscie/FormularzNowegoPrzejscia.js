@@ -1,6 +1,7 @@
-import React, {useState, useEffect, useReducer} from "react";
+import React, {useState, useEffect, useReducer, useContext} from "react";
 import './FormularzNowegoPrzejscia.css'
 import WiadomoscError from "../WiadomoscError";
+import {PrzejscieContext} from '../Context/PrzejscieContext'
 
 
 const przejscieReducer = (state, action) => {
@@ -93,7 +94,7 @@ function FormularzNowegoPrzejscia(props){
     // const [wprowadzoneUwagi, setUwagi] = useState('');
     // const [blad, setBlad] = useState()
 
-    
+    const [nowePrzejscieContext,setNowePrzejscieContext] = useContext(PrzejscieContext);
 
 
 
@@ -131,7 +132,7 @@ function FormularzNowegoPrzejscia(props){
 
 
 
-    const submitHandler = (event) =>{
+    async function submitHandler(event){
         event.preventDefault();
         if(przejscieState.nazwa.trim().length === 0){
             dispatchPrzejscie({type: 'TYP_BLEDU', value:'Podaj nazwę góry'})
@@ -163,7 +164,13 @@ function FormularzNowegoPrzejscia(props){
                 dataPrzejscia: new Date(przejscieState.data),
                 uwagiPrzejscia: przejscieState.data
             }
-            props.onSavePrzejscie(przejscieDane);
+            
+            await setNowePrzejscieContext(()=>{
+                //console.log(przejscieDane);
+                return([przejscieDane,...nowePrzejscieContext])
+            });
+            //console.log(nowePrzejscieContext);
+            //props.onSavePrzejscie(przejscieDane);
             dispatchPrzejscie({type: null});
         }
         
