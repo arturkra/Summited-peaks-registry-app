@@ -10,6 +10,12 @@ function App() {
   
   //const [listaPrzejsc, setPrzejscia] = useState([]);
 
+  let testowaZmienna = null;
+
+
+  fetch('/json')
+    .then(res => res.json())
+    .then(data => console.log(data))
 
   
   // const addPrzejscieHandler = (przejscie) => {
