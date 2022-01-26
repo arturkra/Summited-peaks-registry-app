@@ -5,7 +5,7 @@ import NowePrzejscie from './Components/NowePrzejscie/NowePrzejscie';
 import ListaPrzejsc from './Components/ListaPrzejsc'
 //import { Fragment } from 'react/cjs/react.production.min';
 import {PrzejscieContextProvider} from './Components/Context/PrzejscieContext';
-
+import PanelLogowania from './Components/PanelLogowania';
 function App() {
   
   //const [listaPrzejsc, setPrzejscia] = useState([]);
@@ -37,7 +37,7 @@ function App() {
 
   return (
     <PrzejscieContextProvider>
-
+    <PanelLogowania/>
     
     <React.Fragment>
       <div className='dodaj-przejscie'>

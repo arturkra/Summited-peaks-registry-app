@@ -1,5 +1,6 @@
 import React,{useState, useContext, useEffect} from "react";
 import Przejscie from './Przejscie'
+import './ListaPrzejsc.css'
 import {PrzejscieContext} from './Context/PrzejscieContext'
 
 

@@ -1,7 +1,9 @@
 var express = require('express');
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const Prrzejscie = require('./Database Schemas/Przejscie');
 const Przejscie = require('./Database Schemas/Przejscie');
+const Uzytkownik = require('./Database Schemas/Uzytkownik');
 var router = express.Router();
 
 
@@ -10,6 +12,7 @@ mongoose.connect('mongodb://localhost/peaks-database', () => {
 });
 
 let przejsciaZBazyDanych = null;
+let uzytkownicyZBazyDanych = null;
 
 run();
 
@@ -21,6 +24,7 @@ async function run() {
   //   kraj: 'Polska',
   //   uwagi: 'duzo puchu',
   // })
+  uzytkownicyZBazyDanych= await Uzytkownik.find();
   przejsciaZBazyDanych = await Przejscie.find().sort({$natural: -1})
   //console.log(przejsciaZBazyDanych);
   //console.log(przejscie)
@@ -60,5 +64,26 @@ router.post('/db', function(req,res,next) {
 
   console.log(req.body)  
 });
+
+router.post('/rejestracja', function(req,res,next){
+  console.log(req.body.login);
+  const czyIstnieje = Uzytkownik.findOne({login : req.body.login})
+  if(czyIstnieje){
+    res.json({odpowiedz: 'uzytkownik istnieje'})
+  }
+  else{
+    const nowyUzytkownik = new Uzytkownik({
+      haslo: req.body.haslo, 
+      login: req.body.login
+    });
+    nowyUzytkownik.save();
+    res.json({odpowiedz: 'utworzono poprawnie'});
+  }
+  console.log('zapisano uzytkownika');
+});
+
+router.post('/login', function(req,res,next){
+  console.log(req.body.login);
+})
 
 module.exports = router;
