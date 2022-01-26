@@ -1,6 +1,7 @@
-import React,{useState, useContext} from "react";
+import React,{useState, useContext, useEffect} from "react";
 import Przejscie from './Przejscie'
 import {PrzejscieContext} from './Context/PrzejscieContext'
+
 
 
 
@@ -10,10 +11,26 @@ const  ListaPrzejsc = (props) => {
 
     const [listaPrzejsc, setListaPrzejsc] = useState([])
 
-    ////////////////////////////////////////////////////////////
-    //Nie chce wyświetlać Przejsc. Dodają się do tablicy, ale //
-    //element się nie odświeża.                               //
-    ////////////////////////////////////////////////////////////    
+    let przejsciaZBazyDanych = null;
+
+
+    //pobierzPrzejscia();
+
+    async function pobierzPrzejscia() {
+        const response = await fetch('/db');
+        przejsciaZBazyDanych = await response.json();
+        if(przejsciaZBazyDanych!==nowePrzejscieContext){
+            setNowePrzejscieContext(przejsciaZBazyDanych);
+        }
+        console.log(przejsciaZBazyDanych);
+    }
+    
+    useEffect(()=>{
+        pobierzPrzejscia();
+    },[])
+
+
+
 
 
 
@@ -22,8 +39,8 @@ const  ListaPrzejsc = (props) => {
     //const listaDoWyswietlenia = props.przejscia
     
 
-    console.log("lista przejsc");
-    console.log(nowePrzejscieContext);
+    //console.log("lista przejsc");
+    //console.log(nowePrzejscieContext);
 
     return(
         <div>

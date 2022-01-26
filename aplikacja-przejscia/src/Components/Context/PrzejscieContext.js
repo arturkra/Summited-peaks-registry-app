@@ -8,6 +8,10 @@ export const PrzejscieContext = createContext();
 
 export const PrzejscieContextProvider = ({children}) =>{
 
+    //let przejsciaZBazyDanych;
+
+ 
+
     const[nowePrzejscieContext, setNowePrzejscieContext] = useState([]);
 
     return(

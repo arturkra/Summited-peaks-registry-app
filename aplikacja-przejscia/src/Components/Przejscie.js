@@ -14,9 +14,10 @@ function Przejscie(props){
     let uwagiDoPrzejscia = props.uwagi;
     //console.log(dataPrzejscia)
     //console.log(wysokoscGory)
-    const miesiac = props.data.toLocaleString('pl-PL',{month:'long'});
-    const dzien = props.data.toLocaleString('pl-PL',{day: '2-digit'});
-    const rok = props.data.getFullYear();
+    //const miesiac = props.data.toLocaleString('pl-PL',{month:'long'});
+    //const dzien = props.data.toLocaleString('pl-PL',{day: '2-digit'});
+    //console.log(props.data.toLocaleString('pl-PL',{year: ''}))
+    //const rok = props.data.toLocaleString('pl-PL',{year: 'numeric'});
 /*     const clickHandler = () => {
         console.log('klikniety!!')
         setNazwaGory('nowa nazwa gory');
@@ -26,9 +27,8 @@ function Przejscie(props){
         <div className='przejscie'>
             <div className='data-przejscia'>
                 <div className='pojemnik-daty'></div>
-                    <div>{dzien}</div> 
-                    <div>{miesiac}</div>
-                    <div>{rok}</div>
+                    <div>{dataPrzejscia}</div> 
+                    
             </div>
             
             <div className="gora">

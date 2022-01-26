@@ -17,7 +17,7 @@ function NowePrzejscie(props){
 
     return (
         <div className = "nowe-przejscie">
-            <FormularzNowegoPrzejscia onSavePrzejscie={savePrzejscieHandler} />
+            <FormularzNowegoPrzejscia  />
         </div>
     )
 }

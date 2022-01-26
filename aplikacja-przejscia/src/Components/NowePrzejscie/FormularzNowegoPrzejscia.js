@@ -97,7 +97,6 @@ function FormularzNowegoPrzejscia(props){
     const [nowePrzejscieContext,setNowePrzejscieContext] = useContext(PrzejscieContext);
 
 
-
     const [przejscieState, dispatchPrzejscie] = useReducer(przejscieReducer,
         {
         nazwa: '',
@@ -123,6 +122,7 @@ function FormularzNowegoPrzejscia(props){
     }
     const dataChangeHandler = (event) => {
         dispatchPrzejscie({type:'INPUT_DATA', value: event.target.value});
+        //console.log(event.target.value);
         //setData(event.target.value);
     }
     const uwagiChangeHandler = (event) => {
@@ -161,14 +161,24 @@ function FormularzNowegoPrzejscia(props){
                 nazwaGory:  przejscieState.nazwa,
                 wysokoscGory: przejscieState.wysokosc,
                 krajGory: przejscieState.kraj,
-                dataPrzejscia: new Date(przejscieState.data),
-                uwagiPrzejscia: przejscieState.data
+                dataPrzejscia: new Date(przejscieState.data).toLocaleDateString(),
+                uwagiPrzejscia: przejscieState.uwagi
             }
             
             await setNowePrzejscieContext(()=>{
                 //console.log(przejscieDane);
                 return([przejscieDane,...nowePrzejscieContext])
             });
+
+            const options ={
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                  }, 
+                body: JSON.stringify(przejscieDane)
+            }
+
+            fetch('/db',options)
             //console.log(nowePrzejscieContext);
             //props.onSavePrzejscie(przejscieDane);
             dispatchPrzejscie({type: null});

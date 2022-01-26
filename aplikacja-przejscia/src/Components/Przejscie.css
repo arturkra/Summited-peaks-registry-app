@@ -17,13 +17,12 @@
 .data-przejscia{
     
     border-radius: 7px;
-    padding: 10px;
+    padding: 90px 0;
     background-color: rgb(39, 39, 39);
     color: rgb(180, 180, 180);
     font-size: x-large;
     font-weight: 700;
-    text-align: center; 
-    
+    text-align: center;
     margin: 10px;
     flex-grow: 1;
 }
