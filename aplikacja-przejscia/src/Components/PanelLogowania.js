@@ -26,7 +26,8 @@ function PanelLogowania() {
         setHasloREGState(e.target.value)
     }
 
-    function submitRegistrationHandler() {
+    async function submitRegistrationHandler() {
+        //localStorage.clear();
         const options = {
             method: 'POST',
             headers: {
@@ -34,17 +35,19 @@ function PanelLogowania() {
             },
             body: JSON.stringify({haslo: hasloREGState, login: loginREGState})
         }
-        fetch('/rejestracja',options).then(response => {
-            return response.json()
-        }).then(data => {
-            console.log(data.odpowiedz);
-        });  
-        console.log(options.body);
-        setHasloREGState('');
-        setLoginREGState('');
+        const responsePromise = await fetch('/rejestracja',options);
+        const response = await responsePromise.json();
+        console.log(response);
+        localStorage.setItem('odpowiedz rejestracji', response.odpowiedz);
+
+          
+        //console.log(options.body);
+        //setHasloREGState('');
+        //setLoginREGState('');
     }
 
-    function submitLoginHandler() {
+    async function submitLoginHandler() {
+        //localStorage.clear();
         const options = {
             method: 'POST',
             headers: {
@@ -52,9 +55,15 @@ function PanelLogowania() {
             },
             body: JSON.stringify({haslo: hasloLOGState, login: loginLOGState})
         }
-        fetch('/login',options);  
-        console.log(options.body);
-    }
+
+        const responsePromise = await fetch('/login',options);
+        const response = await responsePromise.json();
+
+        localStorage.setItem('odpowiedz logowania', response.odpowiedz);
+        //console.log(options.body);
+        //setHasloLOGState('');
+        //setLoginLOGState('');
+    }   
 
     return(
         <React.Fragment>
