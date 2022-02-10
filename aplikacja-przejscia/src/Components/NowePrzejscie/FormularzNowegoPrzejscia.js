@@ -2,6 +2,7 @@ import React, {useState, useEffect, useReducer, useContext} from "react";
 import './FormularzNowegoPrzejscia.css'
 import WiadomoscError from "../WiadomoscError";
 import {PrzejscieContext} from '../Context/PrzejscieContext'
+import { IsLoggedInContext } from "../Context/LoginContext";
 
 
 const przejscieReducer = (state, action) => {
@@ -94,8 +95,8 @@ function FormularzNowegoPrzejscia(props){
     // const [wprowadzoneUwagi, setUwagi] = useState('');
     // const [blad, setBlad] = useState()
 
+    const [isLoggedInContext, setIsLoggedInContext] = useContext(IsLoggedInContext);
     const [nowePrzejscieContext,setNowePrzejscieContext] = useContext(PrzejscieContext);
-
 
     const [przejscieState, dispatchPrzejscie] = useReducer(przejscieReducer,
         {
@@ -173,12 +174,17 @@ function FormularzNowegoPrzejscia(props){
             const options ={
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer '+ isLoggedInContext.token
+
                   }, 
                 body: JSON.stringify(przejscieDane)
             }
 
-            fetch('/db',options)
+            const response = await fetch('/db',options);
+            const data = await response.json();
+
+            console.log(data);
             //console.log(nowePrzejscieContext);
             //props.onSavePrzejscie(przejscieDane);
             dispatchPrzejscie({type: null});
@@ -215,7 +221,7 @@ function FormularzNowegoPrzejscia(props){
                 <label>Data</label><br/>
                 <input type = 'date' value = {przejscieState.data} onChange = {dataChangeHandler}/>
             </div>
-            <div className = 'uwagi-do-przejscia'>
+            <div className = 'uwagi-przejscia'>
                 <label>Uwagi</label><br/>
                 <input type = 'text'  value = {przejscieState.uwagi} onChange = {uwagiChangeHandler}/>
             </div>

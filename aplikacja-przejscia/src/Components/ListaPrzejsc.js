@@ -2,6 +2,7 @@ import React,{useState, useContext, useEffect} from "react";
 import Przejscie from './Przejscie'
 import './ListaPrzejsc.css'
 import {PrzejscieContext} from './Context/PrzejscieContext'
+import { IsLoggedInContext } from "./Context/LoginContext";
 
 
 
@@ -9,6 +10,7 @@ import {PrzejscieContext} from './Context/PrzejscieContext'
 const  ListaPrzejsc = (props) => {
     
     const [nowePrzejscieContext,setNowePrzejscieContext] = useContext(PrzejscieContext);
+    const [isLoggedInContext,setIsLoggedInContext] = useContext(IsLoggedInContext);
 
     const [listaPrzejsc, setListaPrzejsc] = useState([])
 
@@ -18,17 +20,30 @@ const  ListaPrzejsc = (props) => {
     //pobierzPrzejscia();
 
     async function pobierzPrzejscia() {
-        const response = await fetch('/db');
+
+        const options = {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer '+ isLoggedInContext.token
+
+            }
+        }
+
+        const response = await fetch('/db',options);
         przejsciaZBazyDanych = await response.json();
+        console.log(przejsciaZBazyDanych);
         if(przejsciaZBazyDanych!==nowePrzejscieContext){
             setNowePrzejscieContext(przejsciaZBazyDanych);
         }
-        console.log(przejsciaZBazyDanych);
+        //console.log(przejsciaZBazyDanych);
     }
     
     useEffect(()=>{
-        pobierzPrzejscia();
-    },[])
+        if(isLoggedInContext.isLoggedIn === true) {
+            pobierzPrzejscia();
+        }
+        
+    },[isLoggedInContext])
 
 
 

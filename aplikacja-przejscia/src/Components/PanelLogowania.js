@@ -1,14 +1,26 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
+import ReactDOM from "react-dom";
+import { IsLoggedInContext } from "./Context/LoginContext";
+import './PanelLogowania.css'
 
 
 
-function PanelLogowania() {
+
+const Backdrop  = (props) => {
+    return <div className='backdrop' onClick = {props.onClick}/>
+}
+
+function PanelLogowania(props) {
+
+    const [isLoggedInContext,setIsLoggedInContext] = useContext(IsLoggedInContext);
 
     const [hasloLOGState,setHasloLOGState] = useState('');
     const [loginLOGState,setLoginLOGState] = useState('');
 
     const [hasloREGState,setHasloREGState] = useState('');
     const [loginREGState,setLoginREGState] = useState('');
+
+    const [loginState, setLoginState] = useState(false);
 
     const loginLOGChangeHandler = (e) => {
         setLoginLOGState(e.target.value)
@@ -26,8 +38,10 @@ function PanelLogowania() {
         setHasloREGState(e.target.value)
     }
 
-    async function submitRegistrationHandler() {
-        //localStorage.clear();
+    async function submitRegistrationHandler(event) {
+        event.preventDefault();
+
+        localStorage.clear();
         const options = {
             method: 'POST',
             headers: {
@@ -37,6 +51,7 @@ function PanelLogowania() {
         }
         const responsePromise = await fetch('/rejestracja',options);
         const response = await responsePromise.json();
+
         console.log(response);
         localStorage.setItem('odpowiedz rejestracji', response.odpowiedz);
 
@@ -46,8 +61,9 @@ function PanelLogowania() {
         //setLoginREGState('');
     }
 
-    async function submitLoginHandler() {
-        //localStorage.clear();
+    async function submitLoginHandler(event) {
+        event.preventDefault();
+        localStorage.clear();
         const options = {
             method: 'POST',
             headers: {
@@ -59,19 +75,37 @@ function PanelLogowania() {
         const responsePromise = await fetch('/login',options);
         const response = await responsePromise.json();
 
-        localStorage.setItem('odpowiedz logowania', response.odpowiedz);
-        //console.log(options.body);
-        //setHasloLOGState('');
-        //setLoginLOGState('');
+        console.log(response);
+
+        setIsLoggedInContext({
+            isLoggedIn: response.odpowiedz,
+            login: response.login,
+            token: response.token
+        })
+
+        localStorage.setItem('login', response.login);
+        localStorage.setItem('token', response.token);
+
+        setHasloLOGState('');
+        setLoginLOGState('');
     }   
+
+    const Backdrop  = (props) => {
+        return <div className='login-backdrop' onClick = {props.onClick}/>
+    }
+    
+
 
     return(
         <React.Fragment>
+            {ReactDOM.createPortal(<Backdrop onClick={props.onClick}/>, document.getElementById('backdrop-root'))}
+            <div  className="formularz">
             <header>
-                <h2>Zaloguj się</h2>
+               Zaloguj się
             </header>
+            
             <form className="formularz-logowania" onSubmit={submitLoginHandler}>
-            <div>
+            <div >
                 <label>Login</label>
                 <input type='text' value={loginLOGState} onChange={loginLOGChangeHandler}></input>
             </div>
@@ -92,8 +126,12 @@ function PanelLogowania() {
             </div>
                 <button type="submit">Zarejestruj się</button>
             </form>
+            </div>
+            
             <footer>    
             </footer>
+            
+            
         </React.Fragment>
 
 
