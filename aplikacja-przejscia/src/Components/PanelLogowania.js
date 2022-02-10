@@ -57,8 +57,8 @@ function PanelLogowania(props) {
 
           
         //console.log(options.body);
-        //setHasloREGState('');
-        //setLoginREGState('');
+        setHasloREGState('');
+        setLoginREGState('');
     }
 
     async function submitLoginHandler(event) {
@@ -111,7 +111,7 @@ function PanelLogowania(props) {
             </div>
             <div>
                 <label>Hasło</label>
-                <input type='text' value={hasloLOGState} onChange={hasloLOGChangeHandler}></input>
+                <input type='password' value={hasloLOGState} onChange={hasloLOGChangeHandler}></input>
             </div>
                 <button type="submit">Zaloguj</button>
             </form>
@@ -122,7 +122,7 @@ function PanelLogowania(props) {
             </div>
             <div>
                 <label>Hasło</label>
-                <input type='text' value={hasloREGState} onChange={hasloREGChangeHandler}></input>
+                <input type='password' value={hasloREGState} onChange={hasloREGChangeHandler}></input>
             </div>
                 <button type="submit">Zarejestruj się</button>
             </form>
